@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Counter Incrementer</title>
+</head>
+<body>
+    <!-- Firebase SDKs - you'll need to include these from the Firebase Console -->
+    <!-- Placeholders for the actual SDK scripts, you'll get these from your project's settings in Firebase Console -->
+    <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"></script>
+    
+        // Your Firebase project configuration goes here!
+        // You can find this in your Firebase Console: Project settings -> General -> Your apps -> Web app -> Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyChzYVVAaf3fgwNi871tBhYwB-csiD9iNU",
+            authDomain: "referral-visitors.firebaseapp.com",
+            projectId: "referral-visitors", // This is 'referral-visitors' for you!
+            storageBucket: "referral-visitors.firebasestorage.app",
+            messagingSenderId: "574546791584",
+            appId: "1:574546791584:web:78ffda2ca2f24e215fcdc5",
+            measurementId: "G-9C64P8W0R9"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the Firestore database service
+        const db = firebase.firestore();
+
+        // Reference to your specific document and field
+        // We'll assume you have a document named 'main_counter' inside 'visitors_counter' collection
+        const counterDocRef = db.collection("visitors_counter").doc("QvrlxAFD33Zmor4TqlEj");
+
+        // Function to increment the counter
+        async function incrementCounter() {
+            try {
+                // Use FieldValue.increment to safely increase the number
+                await counterDocRef.update({
+                    counter: firebase.firestore.FieldValue.increment(1)
+                });
+                console.log("Counter incremented!");
+            } catch (error) {
+                console.error("Error incrementing counter: ", error);
+            }
+        }
+
+        // Call the increment function when the page loads
+        document.addEventListener("DOMContentLoaded", incrementCounter);
+    </script>
+</body>
+</html>
