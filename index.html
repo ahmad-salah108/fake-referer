@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Auto Redirect</title></head>
+<body>
+<a id="redirectLink" href="/api/referer" style="display:none;">Go</a>
+<script>
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("redirectLink").click();
+  }, 1000); // 1 second delay
+};
+</script>
+<p>Redirecting...</p>
+</body>
+</html>
